@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import java.io.File;
 
 /**
  * Import 2 columns of sample data
@@ -15,14 +19,28 @@ public class ImportCSV {
 	ArrayList<Integer> testDataSampleB = new ArrayList<Integer>();
 
 	/**
-	 * Constructor. Fill ArrayList with data from csv file
+	 * Constructor. Fill ArrayList with data from CSV file
 	 * 
 	 */
 	public void createList() {
 		String line = "";
 		String splitBy = ",";
+		String csvName = "";
 
-		try (BufferedReader br = new BufferedReader(new FileReader("testdata.csv"))) {
+		// Open csv file in file explorer
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV FILES", "csv");
+		fileChooser.setFileFilter(filter);
+
+		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + "/Downloads/"));
+		int returnValue = fileChooser.showOpenDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			System.out.println("Opening file " + fileChooser.getSelectedFile().getName() + ".");
+			csvName = fileChooser.getSelectedFile().getName();
+		}
+
+		// Read csv file into ArrayLists
+		try (BufferedReader br = new BufferedReader(new FileReader(csvName))) {
 			while ((line = br.readLine()) != null) {
 				String[] sample = line.split(splitBy);
 				testDataSampleA.add(Integer.valueOf(sample[0]));
