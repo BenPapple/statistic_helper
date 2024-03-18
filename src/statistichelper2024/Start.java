@@ -1,6 +1,5 @@
 package statistichelper2024;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,15 +22,28 @@ public class Start {
 	 * @param args command line input parameters
 	 */
 	public static void main(String[] args) {
-		// Add test data
-		ArrayList<Integer> testDataSampleA = new ArrayList<Integer>();
-		Collections.addAll(testDataSampleA, 320, 450, 250, 700, 540, 260, 360, 530, 560, 510, 490, 370, 600, 660, 810,
-				730, 480, 240, 410, 640, 460, 670, 320, 200, 750, 640, 410, 1000, 940, 690, 330, 290, 330, 670, 650, 80,
-				680, 720, 540, 720, 370, 990, 570, 470, 490, 740, 520, 420, 360, 330);
-		ArrayList<Integer> testDataSampleB = new ArrayList<Integer>();
-		Collections.addAll(testDataSampleB, 440, 360, 600, 640, 480, 240, 360, 360, 520, 490, 480, 560, 360, 360, 640,
-				560, 560, 240, 480, 680, 480, 440, 400, 280, 370, 400, 520, 520, 480, 680, 620, 520, 480, 560, 640, 240,
-				440, 570, 360, 560, 400, 520, 480, 400, 400, 440, 640, 520, 440, 370);
+
+		// hard coded test data
+//		ArrayList<Integer> testDataSampleA = new ArrayList<Integer>();
+//		Collections.addAll(testDataSampleA, 320, 450, 250, 700, 540, 260, 360, 530, 560, 510, 490, 370, 600, 660, 810,
+//				730, 480, 240, 410, 640, 460, 670, 320, 200, 750, 640, 410, 1000, 940, 690, 330, 290, 330, 670, 650, 80,
+//				680, 720, 540, 720, 370, 990, 570, 470, 490, 740, 520, 420, 360, 330);
+//		ArrayList<Integer> testDataSampleB = new ArrayList<Integer>();
+//		Collections.addAll(testDataSampleB, 440, 360, 600, 640, 480, 240, 360, 360, 520, 490, 480, 560, 360, 360, 640,
+//				560, 560, 240, 480, 680, 480, 440, 400, 280, 370, 400, 520, 520, 480, 680, 620, 520, 480, 560, 640, 240,
+//				440, 570, 360, 560, 400, 520, 480, 400, 400, 440, 640, 520, 440, 370);
+		
+		// expected result for hard coded test data or testdata.csv
+		// Sum of negative ranks: 419.5
+		// Sum of positive ranks: 756.5
+
+		// Prepare CSV for import
+		ImportCSV importedCSV = new ImportCSV();
+		importedCSV.createList();
+
+		// Import CSV data
+		ArrayList<Integer> testDataSampleA = new ArrayList<Integer>(importedCSV.getListA());
+		ArrayList<Integer> testDataSampleB = new ArrayList<Integer>(importedCSV.getListB());
 
 		// Print sample lists A and B and count items
 		System.out.println("++ Sample ++++++++++++++++++++++++++++++");
@@ -108,8 +120,8 @@ public class Start {
 		} // for1
 
 		// Wilcoxon Signed-Rank Test rank result
-		System.out.println("Sum Negative Rank: " + negRank);
-		System.out.println("Sum Positive Rank: " + posRank);
+		System.out.println("Sum of negative ranks: " + negRank);
+		System.out.println("Sum of positive ranks: " + posRank);
 
 	} // main
 } // end
